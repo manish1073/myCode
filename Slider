@@ -1,0 +1,39 @@
+import React, { useState, useEffect } from 'react';
+
+const sliderData = [
+  'https://picsum.photos/200/300',
+  'https://picsum.photos/201/300',
+  'https://picsum.photos/202/300',
+];
+
+const Sliders = () => {
+  const [sliderImage, setSliderImage] = useState(sliderData[0]);
+  useEffect(() => {
+    let num = 0;
+    const interval = setInterval(() => {
+      if (num < sliderData.length - 1) {
+        num++;
+      } else {
+        num = 0;
+      }
+      setSliderImage(sliderData[num]);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div
+    style={{
+      width: '500px',
+      height:' 400px',
+      display: 'flex',
+      justifyContent:'center',
+      placeItems: 'center',
+    }}>
+      <img src={sliderImage} alt="slider" />
+    </div>
+  );
+};
+
+export default Sliders;
